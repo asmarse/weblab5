@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV - Asmar Seyidova</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f0f0;
+    }
+    .resume {
+      display: flex;
+      max-width: 1000px;
+      margin: 30px auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .sidebar {
+      width: 30%;
+      background-color: #0b3d5c;
+      color: white;
+      padding: 20px;
+    }
+    .sidebar h2, .content h2 {
+      cursor: pointer;
+      padding-bottom: 5px;
+      margin-top: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+    .section {
+      display: none;
+    }
+    .profile-photo {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .profile-photo img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+    .content {
+      width: 70%;
+      padding: 30px;
+      color: #333;
+    }
+    h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+    h3 {
+      margin-top: 5px;
+      color: #555;
+    }
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+    button {
+      padding: 8px 12px;
+      background-color: #0b3d5c;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    button:hover {
+      background-color: #094266;
+    }
+    .new-entry {
+      margin-bottom: 10px;
+    }
+    .new-entry input {
+      margin-bottom: 5px;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: -8px;
+      margin-bottom: 10px;
+    }
+    .save-all {
+      background-color: #28a745;
+      margin: 20px auto;
+      display: block;
+      padding: 10px 20px;
+    }
+    .save-all:hover {
+      background-color: #218838;
+    }
+    .reset-all {
+      background-color: #dc3545;
+      margin: 20px auto;
+      display: block;
+      padding: 10px 20px;
+    }
+    .reset-all:hover {
+      background-color: #c82333;
+    }
+    .edit-btn {
+      background-color: #ffc107;
+      color: #212529;
+      margin-left: 10px;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    .edit-btn:hover {
+      background-color: #e0a800;
+    }
+    .editable-field {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .editable-field p, .editable-field li {
+      margin: 0;
+      flex-grow: 1;
+    }
+    .job-details {
+      margin-left: 20px;
+    }
+    .edit-form {
+      background: #f8f9fa;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+    }
+    .profile-text {
+      white-space: pre-line;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <aside class="sidebar">
+      <div class="profile-photo">
+        <img src="https://img.freepik.com/premium-photo/portrait-beautiful-young-woman-with-curly-hair_847439-4472.jpg" alt="Profile Photo">
+      </div>
+
+      <h2 onclick="toggleSection('contact-list')">CONTACT</h2>
+      <ul class="contact section" id="contact-list"></ul>
+
+      <h2 onclick="toggleSection('education-list')">EDUCATION</h2>
+      <div class="section" id="education-list"></div>
+      <button onclick="addDropdown('education-list', 'Education')">Add Education</button>
+
+      <h2 onclick="toggleSection('skills-list')">SKILLS</h2>
+      <ul class="skills section" id="skills-list"></ul>
+      <button onclick="addDropdown('skills-list', 'Skill')">Add Skill</button>
+
+      <h2 onclick="toggleSection('languages-list')">LANGUAGES</h2>
+      <ul class="skills section" id="languages-list"></ul>
+    </aside>
+
+    <main class="content">
+      <h1>
+        <strong id="full-name">ASMAR SEYIDOVA</strong>
+        <button class="edit-btn" onclick="editField('full-name', 'text', 'Full Name')">Edit</button>
+      </h1>
+      <h3 id="job-title">WEB-DESIGNER <button class="edit-btn" onclick="editField('job-title', 'text', 'Job Title')">Edit</button></h3>
+
+      <section>
+        <h2 onclick="toggleSection('profile-section')">PROFILE</h2>
+        <div class="section" id="profile-section-container">
+          <div class="editable-field">
+            <p class="profile-text" id="profile-section">As a fresh university graduate with a degree in Web Development and Design, I am enthusiastic about merging creativity with technology to produce impactful web solutions. My academic journey has equipped me with the technical expertise and artistic insight necessary to craft engaging digital experiences. With hands-on experience as an intern and freelance projects under my belt, I thrive on challenges and am eager to collaborate with dynamic teams. Outside of my professional pursuits, I am inspired by modern art and enjoy exploring the interplay between aesthetics and functionality in digital spaces.</p>
+            <button class="edit-btn" onclick="editProfileText()">Edit</button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 onclick="toggleSection('work-list')">WORK EXPERIENCE</h2>
+        <div class="section" id="work-list"></div>
+        <button onclick="addDropdown('work-list', 'Work')">Add Work</button>
+      </section>
+
+      <section>
+        <h2 onclick="toggleSection('reference-list')">REFERENCE</h2>
+        <div class="section" id="reference-list"></div>
+      </section>
+      
+      <button class="save-all" onclick="saveAllData()">Save All Data</button>
+      <button class="reset-all" onclick="resetAllData()">Reset All Data</button>
+    </main>
+  </div>
+
+  <script>
+    // DATA VARIABLES
+    let cvData = {
+      fullName: "ASMAR SEYIDOVA",
+      jobTitle: "WEB-DESIGNER",
+      contactInfo: [
+        "📞 +094 555 55 55",
+        "✉️ esmerseyidova11@gmail.com",
+        "🌐 www.esy.com",
+        "📍 Baku ,Azerbaijan"
+      ],
+      educationInfo: [
+        { years: "2024 – 2028", school: "Azerbaijan Technical University" },
+        { years: "2029 – 2033", school: "Business University" }
+      ],
+      skills: ["Design", "Public Relations", "Teamwork", "Communication", "Critical Thinking"],
+      languages: ["English (Fluent)", "Turkish (Advanced)"],
+      profileText: "As a fresh university graduate with a degree in Web Development and Design, I am enthusiastic about merging creativity with technology to produce impactful web solutions. My academic journey has equipped me with the technical expertise and artistic insight necessary to craft engaging digital experiences. With hands-on experience as an intern and freelance projects under my belt, I thrive on challenges and am eager to collaborate with dynamic teams. Outside of my professional pursuits, I am inspired by modern art and enjoy exploring the interplay between aesthetics and functionality in digital spaces.",
+      workExperience: [
+        {
+          title: "Intern - Web Design Assistant – DESIGNER & Specialist",
+          years: "2025 – Present",
+          details: [
+            "Created mockups and prototypes for various projects.",
+            "Collaborated with senior designers to optimize website layouts.",
+            "Worked on SEO principles to improve rankings."
+          ]
+        },
+        {
+          title: "Azercell – Freelance Web Designer",
+          years: "2026 – 2027",
+          details: [
+            "Designed responsive websites for local businesses.",
+            "Integrated e-commerce platforms and optimized for mobile."
+          ]
+        }
+      ],
+      references: [
+        { name: "Aidan Valiyeva", title: "CTO, Wonder Inc.", email: "aiityv@email.com" },
+        { name: "Oguz Seidov", title: "CEO, Wonder Inc.", email: "oguz@email.com" }
+      ]
+    };
+
+    // Backup of original data for reset functionality
+    let originalData = JSON.parse(JSON.stringify(cvData));
+
+    // RENDER FUNCTIONS
+    window.onload = async function () {
+      loadFromLocalStorage();
+      
+      try {
+        const response = await fetch('data.json');
+        if (response.ok) {
+          const jsonData = await response.json();
+          if (!localStorage.getItem('cvData')) {
+            cvData = {...cvData, ...jsonData};
+            originalData = JSON.parse(JSON.stringify(cvData));
+            saveToLocalStorage();
+          }
+        }
+      } catch (error) {
+        console.log("No data.json file found or error loading it. Using default data.");
+      }
+      
+      renderAllData();
+    };
+
+    function renderAllData() {
+      document.getElementById('full-name').textContent = cvData.fullName;
+      document.getElementById('job-title').textContent = cvData.jobTitle;
+      renderList('contact-list', cvData.contactInfo, 'li');
+      renderEducation();
+      renderList('skills-list', cvData.skills, 'li');
+      renderList('languages-list', cvData.languages, 'li');
+      document.getElementById('profile-section').innerText = cvData.profileText;
+      renderWorkExperience();
+      renderReferences();
+    }
+
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      section.style.display = section.style.display === "none" ? "block" : "none";
+    }
+
+    function renderList(containerId, data, elementType) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      data.forEach((item, index) => {
+        const containerDiv = document.createElement('div');
+        containerDiv.className = 'editable-field';
+        
+        const el = document.createElement(elementType);
+        el.innerText = item;
+        
+        const editBtn = document.createElement('button');
+        editBtn.className = 'edit-btn';
+        editBtn.innerText = 'Edit';
+        editBtn.onclick = () => editListItem(containerId, index, item);
+        
+        containerDiv.appendChild(el);
+        containerDiv.appendChild(editBtn);
+        container.appendChild(containerDiv);
+      });
+    }
+
+    function renderEducation() {
+      const container = document.getElementById('education-list');
+      container.innerHTML = '';
+      cvData.educationInfo.forEach((edu, index) => {
+        const containerDiv = document.createElement('div');
+        containerDiv.className = 'editable-field';
+        
+        const p = document.createElement('p');
+        p.innerHTML = `<strong>${edu.years}</strong><br>${edu.school}`;
+        
+        const editBtn = document.createElement('button');
+        editBtn.className = 'edit-btn';
+        editBtn.innerText = 'Edit';
+        editBtn.onclick = () => editEducation(index);
+        
+        containerDiv.appendChild(p);
+        containerDiv.appendChild(editBtn);
+        container.appendChild(containerDiv);
+      });
+    }
+
+    function renderWorkExperience() {
+      const container = document.getElementById('work-list');
+      container.innerHTML = '';
+      cvData.workExperience.forEach((job, index) => {
+        const jobDiv = document.createElement('div');
+        jobDiv.classList.add('job');
+        
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'editable-field';
+        
+        const titleSpan = document.createElement('span');
+        titleSpan.innerHTML = `<h4>${job.title} <span>${job.years}</span></h4>`;
+        
+        const editBtn = document.createElement('button');
+        editBtn.className = 'edit-btn';
+        editBtn.innerText = 'Edit';
+        editBtn.onclick = () => editWorkExperience(index);
+        
+        headerDiv.appendChild(titleSpan);
+        headerDiv.appendChild(editBtn);
+        jobDiv.appendChild(headerDiv);
+        
+        const ul = document.createElement('ul');
+        ul.className = 'job-details';
+        job.details.forEach((detail, detailIndex) => {
+          const li = document.createElement('li');
+          li.innerText = detail;
+          ul.appendChild(li);
+        });
+        jobDiv.appendChild(ul);
+        
+        container.appendChild(jobDiv);
+      });
+    }
+
+    function renderReferences() {
+      const container = document.getElementById('reference-list');
+      container.innerHTML = '';
+      cvData.references.forEach((ref, index) => {
+        const containerDiv = document.createElement('div');
+        containerDiv.className = 'editable-field';
+        
+        const p = document.createElement('p');
+        p.innerHTML = `<strong>${ref.name}</strong> – ${ref.title} – ${ref.email}`;
+        
+        const editBtn = document.createElement('button');
+        editBtn.className = 'edit-btn';
+        editBtn.innerText = 'Edit';
+        editBtn.onclick = () => editReference(index);
+        
+        containerDiv.appendChild(p);
+        containerDiv.appendChild(editBtn);
+        container.appendChild(containerDiv);
+      });
+    }
+
+    function editProfileText() {
+      const currentText = cvData.profileText;
+      const newText = prompt("Edit your profile text:", currentText);
+      
+      if (newText !== null && newText !== currentText) {
+        cvData.profileText = newText;
+        document.getElementById('profile-section').textContent = newText;
+        saveToLocalStorage();
+      }
+    }
+
+    function editField(id, inputType, label) {
+      const element = document.getElementById(id);
+      const parent = element.parentElement;
+      
+      const form = document.createElement('div');
+      form.className = 'edit-form';
+      
+      const input = inputType === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+      input.type = inputType === 'textarea' ? 'textarea' : 'text';
+      input.value = element.textContent;
+      input.placeholder = label;
+      
+      const saveBtn = document.createElement('button');
+      saveBtn.innerText = "Save";
+      saveBtn.onclick = function() {
+        element.textContent = input.value;
+        
+        if (id === 'full-name') {
+          cvData.fullName = input.value;
+        } else if (id === 'job-title') {
+          cvData.jobTitle = input.value;
+        }
+        
+        saveToLocalStorage();
+        form.remove();
+        element.style.display = 'block';
+      };
+      
+      const cancelBtn = document.createElement('button');
+      cancelBtn.innerText = "Cancel";
+      cancelBtn.onclick = function() {
+        form.remove();
+        element.style.display = 'block';
+      };
+      
+      form.appendChild(input);
+      form.appendChild(saveBtn);
+      form.appendChild(cancelBtn);
+      
+      element.style.display = 'none';
+      parent.insertBefore(form, element);
+    }
+
+    function editListItem(listId, index, currentValue) {
+      const list = document.getElementById(listId);
+      const listItem = list.children[index];
+      const textElement = listItem.querySelector('li') || listItem.querySelector('p');
+      
+      const form = document.createElement('div');
+      form.className = 'edit-form';
+      
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = currentValue;
+      
+      const saveBtn = document.createElement('button');
+      saveBtn.innerText = "Save";
+      saveBtn.onclick = function() {
+        const newValue = input.value.trim();
+        if (newValue) {
+          textElement.textContent = newValue;
+          
+          if (listId === 'contact-list') {
+            cvData.contactInfo[index] = newValue;
+          } else if (listId === 'skills-list') {
+            cvData.skills[index] = newValue;
+          } else if (listId === 'languages-list') {
+            cvData.languages[index] = newValue;
+          }
+          
+          saveToLocalStorage();
+          form.remove();
+          textElement.style.display = 'block';
+        }
+      };
+      
+      const cancelBtn = document.createElement('button');
+      cancelBtn.innerText = "Cancel";
+      cancelBtn.onclick = function() {
+        form.remove();
+        textElement.style.display = 'block';
+      };
+      
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = 'reset-all';
+      deleteBtn.onclick = function() {
+        if (listId === 'contact-list') {
+          cvData.contactInfo.splice(index, 1);
+        } else if (listId === 'skills-list') {
+          cvData.skills.splice(index, 1);
+        } else if (listId === 'languages-list') {
+          cvData.languages.splice(index, 1);
+        }
+        
+        saveToLocalStorage();
+        renderList(listId, listId === 'contact-list' ? cvData.contactInfo : 
+                  listId === 'skills-list' ? cvData.skills : cvData.languages, 
+                  listId === 'contact-list' ? 'li' : 'p');
+      };
+      
+      form.appendChild(input);
+      form.appendChild(saveBtn);
+      form.appendChild(cancelBtn);
+      form.appendChild(deleteBtn);
+      
+      textElement.style.display = 'none';
+      listItem.insertBefore(form, textElement.nextSibling);
+    }
+
+    function editEducation(index) {
+      const container = document.getElementById('education-list');
+      const eduItem = container.children[index];
+      const textElement = eduItem.querySelector('p');
+      
+      const form = document.createElement('div');
+      form.className = 'edit-form';
+      
+      const yearsInput = document.createElement('input');
+      yearsInput.type = 'text';
+      yearsInput.value = cvData.educationInfo[index].years;
+      yearsInput.placeholder = "Years (e.g., 2020-2024)";
+      
+      const schoolInput = document.createElement('input');
+      schoolInput.type = 'text';
+      schoolInput.value = cvData.educationInfo[index].school;
+      schoolInput.placeholder = "School Name";
+      
+      const saveBtn = document.createElement('button');
+      saveBtn.innerText = "Save";
+      saveBtn.onclick = function() {
+        const years = yearsInput.value.trim();
+        const school = schoolInput.value.trim();
+        
+        if (years && school) {
+          cvData.educationInfo[index] = { years, school };
+          saveToLocalStorage();
+          renderEducation();
+        }
+      };
+      
+      const cancelBtn = document.createElement('button');
+      cancelBtn.innerText = "Cancel";
+      cancelBtn.onclick = function() {
+        form.remove();
+      };
+      
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = 'reset-all';
+      deleteBtn.onclick = function() {
+        cvData.educationInfo.splice(index, 1);
+        saveToLocalStorage();
+        renderEducation();
+      };
+      
+      form.appendChild(yearsInput);
+      form.appendChild(schoolInput);
+      form.appendChild(saveBtn);
+      form.appendChild(cancelBtn);
+      form.appendChild(deleteBtn);
+      
+      eduItem.replaceChild(form, textElement);
+    }
+
+    function editWorkExperience(index) {
+      const container = document.getElementById('work-list');
+      const workItem = container.children[index];
+      
+      const form = document.createElement('div');
+      form.className = 'edit-form';
+      
+      const titleInput = document.createElement('input');
+      titleInput.type = 'text';
+      titleInput.value = cvData.workExperience[index].title;
+      titleInput.placeholder = "Job Title";
+      
+      const yearsInput = document.createElement('input');
+      yearsInput.type = 'text';
+      yearsInput.value = cvData.workExperience[index].years;
+      yearsInput.placeholder = "Years (e.g., 2020-2022)";
+      
+      const detailsTextarea = document.createElement('textarea');
+      detailsTextarea.value = cvData.workExperience[index].details.join('\n');
+      detailsTextarea.placeholder = "Enter details, one per line";
+      detailsTextarea.rows = 4;
+      
+      const saveBtn = document.createElement('button');
+      saveBtn.innerText = "Save";
+      saveBtn.onclick = function() {
+        const title = titleInput.value.trim();
+        const years = yearsInput.value.trim();
+        const details = detailsTextarea.value.split('\n').map(d => d.trim()).filter(d => d);
+        
+        if (title && years && details.length > 0) {
+          cvData.workExperience[index] = { title, years, details };
+          saveToLocalStorage();
+          renderWorkExperience();
+        }
+      };
+      
+      const cancelBtn = document.createElement('button');
+      cancelBtn.innerText = "Cancel";
+      cancelBtn.onclick = function() {
+        form.remove();
+      };
+      
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = 'reset-all';
+      deleteBtn.onclick = function() {
+        cvData.workExperience.splice(index, 1);
+        saveToLocalStorage();
+        renderWorkExperience();
+      };
+      
+      form.appendChild(titleInput);
+      form.appendChild(yearsInput);
+      form.appendChild(detailsTextarea);
+      form.appendChild(saveBtn);
+      form.appendChild(cancelBtn);
+      form.appendChild(deleteBtn);
+      
+      workItem.replaceChild(form, workItem.children[1]);
+      workItem.children[0].style.display = 'none';
+    }
+
+    function editReference(index) {
+      const container = document.getElementById('reference-list');
+      const refItem = container.children[index];
+      const textElement = refItem.querySelector('p');
+      
+      const form = document.createElement('div');
+      form.className = 'edit-form';
+      
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.value = cvData.references[index].name;
+      nameInput.placeholder = "Name";
+      
+      const titleInput = document.createElement('input');
+      titleInput.type = 'text';
+      titleInput.value = cvData.references[index].title;
+      titleInput.placeholder = "Title";
+      
+      const emailInput = document.createElement('input');
+      emailInput.type = 'email';
+      emailInput.value = cvData.references[index].email;
+      emailInput.placeholder = "Email";
+      
+      const saveBtn = document.createElement('button');
+      saveBtn.innerText = "Save";
+      saveBtn.onclick = function() {
+        const name = nameInput.value.trim();
+        const title = titleInput.value.trim();
+        const email = emailInput.value.trim();
+        
+        if (name && title && email) {
+          cvData.references[index] = { name, title, email };
+          saveToLocalStorage();
+          renderReferences();
+        }
+      };
+      
+      const cancelBtn = document.createElement('button');
+      cancelBtn.innerText = "Cancel";
+      cancelBtn.onclick = function() {
+        form.remove();
+      };
+      
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = 'reset-all';
+      deleteBtn.onclick = function() {
+        cvData.references.splice(index, 1);
+        saveToLocalStorage();
+        renderReferences();
+      };
+      
+      form.appendChild(nameInput);
+      form.appendChild(titleInput);
+      form.appendChild(emailInput);
+      form.appendChild(saveBtn);
+      form.appendChild(cancelBtn);
+      form.appendChild(deleteBtn);
+      
+      refItem.replaceChild(form, textElement);
+    }
+
+    function addDropdown(id, type) {
+      const container = document.getElementById(id);
+      const div = document.createElement('div');
+      div.className = 'new-entry edit-form';
+      
+      if (type === "Education") {
+        const yearsInput = document.createElement('input');
+        yearsInput.placeholder = "Enter Years (e.g., 2020 – 2024)";
+        yearsInput.required = true;
+        div.appendChild(yearsInput);
+        
+        const schoolInput = document.createElement('input');
+        schoolInput.placeholder = "Enter School Name";
+        schoolInput.required = true;
+        div.appendChild(schoolInput);
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error';
+        div.appendChild(errorDiv);
+        
+        const saveBtn = document.createElement('button');
+        saveBtn.innerText = "Save";
+        saveBtn.onclick = function () {
+          const years = yearsInput.value.trim();
+          const school = schoolInput.value.trim();
+          
+          if (!years || !school) {
+            errorDiv.innerText = "Both fields are required";
+            return;
+          }
+          
+          cvData.educationInfo.push({ years, school });
+          saveToLocalStorage();
+          renderEducation();
+          div.remove();
+        };
+        
+        div.appendChild(saveBtn);
+        
+      } else if (type === "Skill") {
+        const input = document.createElement('input');
+        input.placeholder = "Enter Skill...";
+        input.required = true;
+        div.appendChild(input);
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error';
+        div.appendChild(errorDiv);
+        
+        const saveBtn = document.createElement('button');
+        saveBtn.innerText = "Save";
+        saveBtn.onclick = function () {
+          const value = input.value.trim();
+          if (!value) {
+            errorDiv.innerText = "Skill is required";
+            return;
+          }
+          
+          cvData.skills.push(value);
+          saveToLocalStorage();
+          renderList('skills-list', cvData.skills, 'li');
+          div.remove();
+        };
+        
+        div.appendChild(saveBtn);
+        
+      } else if (type === "Work") {
+        const titleInput = document.createElement('input');
+        titleInput.placeholder = "Job Title";
+        titleInput.required = true;
+        div.appendChild(titleInput);
+        
+        const yearsInput = document.createElement('input');
+        yearsInput.placeholder = "Years (e.g., 2020 – 2022)";
+        yearsInput.required = true;
+        div.appendChild(yearsInput);
+        
+        const detailsTextarea = document.createElement('textarea');
+        detailsTextarea.placeholder = "Details (one per line)";
+        detailsTextarea.required = true;
+        detailsTextarea.rows = 4;
+        div.appendChild(detailsTextarea);
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error';
+        div.appendChild(errorDiv);
+        
+        const saveBtn = document.createElement('button');
+        saveBtn.innerText = "Save";
+        saveBtn.onclick = function () {
+          const title = titleInput.value.trim();
+          const years = yearsInput.value.trim();
+          const details = detailsTextarea.value.split('\n').map(d => d.trim()).filter(d => d);
+          
+          if (!title || !years || details.length === 0) {
+            errorDiv.innerText = "All fields are required";
+            return;
+          }
+          
+          cvData.workExperience.push({
+            title,
+            years,
+            details
+          });
+          
+          saveToLocalStorage();
+          renderWorkExperience();
+          div.remove();
+        };
+        
+        div.appendChild(saveBtn);
+      }
+
+      const removeBtn = document.createElement('button');
+      removeBtn.innerText = "Cancel";
+      removeBtn.onclick = () => div.remove();
+
+      div.appendChild(removeBtn);
+      container.appendChild(div);
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem('cvData', JSON.stringify(cvData));
+    }
+
+    function loadFromLocalStorage() {
+      const savedData = localStorage.getItem('cvData');
+      if (savedData) {
+        cvData = JSON.parse(savedData);
+      }
+    }
+
+    function saveAllData() {
+      saveToLocalStorage();
+      alert('All data has been saved!');
+    }
+
+    function resetAllData() {
+      if (confirm('Are you sure you want to reset all data to the last saved version?')) {
+        cvData = JSON.parse(JSON.stringify(originalData));
+        saveToLocalStorage();
+        renderAllData();
+        alert('Data has been reset to the original values.');
+      }
+    }
+  </script>
+</body>
+</html>
